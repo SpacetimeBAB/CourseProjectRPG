@@ -16,6 +16,8 @@
 # If choose to start game then prompt for name and begin adventure
 # Send to destination to help out
 # Now has random assignation of points in some choices to give variety to points (NEW)
+# Added exceptions so users don't see error messages (NEW)
+# Only added to main as those are the ones that cause crashes, on other parts simply ignores and if does cause crash simply restarts with the error message I wrote. (NEW)
 # Chooses to go to Portsmouth
 # Chooses how to save villagers
 # Send to other 2 destinations
@@ -119,34 +121,43 @@ def saveElves(totalPoints):
         print(f"Total points: {totalPoints}")
     return totalPoints
 
+# Function to display the intro
+def displayIntro():
+    print("-" * 7, "", "Slatan", "", "-" * 7)
+    print("Once upon a time, in a world long, long ago \n"
+          "There was a hero named 'Slatan'!")
+
 # Overall main function handling the main menu and introduction to the game
 def main():
     # Initialize total points, main menu option, and Slatan's last name
     totalPoints = mainMenuOption = 0
     slatanLastName = ""
-    print("-" * 7, "", "Slatan", "", "-" * 7)
-    print("Once upon a time, in a world long, long ago \n"
-          "There was a hero named 'Slatan'!")
-
+    displayIntro()
     while True:
-        mainMenuOption = int(input("     [1] Rules\n"
-                                   "     [2] Start your adventure\n"
-                                   "     [3] Quit Game\n"))
-        if mainMenuOption == 1:
-            print("Never, ever say the name of 'Drea the Goddess'\n"
-                  "Furthermore, never look the big Swan in the eyes\n"
-                  "If you ever get scared say the name of Slatan's love Athena to quit the game!")
-        elif mainMenuOption == 2:
-            # Adventure begins and present lore
-            slatanLastName = input("What shall Slatan's last name be?")
-            # Sends to other function to handle destination choices and points
-            totalPoints = destinationChoice(slatanLastName, totalPoints)
-        elif mainMenuOption == 3:
-            # Quits the game after choosing to quit.
-            print("Athena thanks you for your time.")
-            break
-        else:
-            print("Invalid option, try again.")
+        try:
+            mainMenuOption = int(input("     [1] Rules\n"
+                                       "     [2] Start your adventure\n"
+                                       "     [3] Quit Game\n"))
+            if mainMenuOption == 1:
+                print("Never, ever say the name of 'Drea the Goddess'\n"
+                      "Furthermore, never look the big Swan in the eyes\n"
+                      "If you ever get scared say the name of Slatan's love Athena to quit the game!")
+            elif mainMenuOption == 2:
+                # Adventure begins and present lore
+                slatanLastName = input("What shall Slatan's last name be?")
+                # Sends to other function to handle destination choices and points
+                totalPoints = destinationChoice(slatanLastName, totalPoints)
+            elif mainMenuOption == 3:
+                # Quits the game after choosing to quit.
+                print("Athena thanks you for your time.")
+                break
+            else:
+                print("Invalid option, try again.")
+        except ValueError:
+            print("It needs to be a whole number. Try again.")
+        except TypeError:
+            print("You need to say something... Try again.")
+
 
 
 
