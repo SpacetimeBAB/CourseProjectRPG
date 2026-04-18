@@ -1,9 +1,0 @@
-# Display introduction to RPG and show game title Slatan
-# Give Main Menu and give options to choose
-# Depending on option chosen give output
-# If choose rules send to rules and then back to main menu
-# If choose to start game then prompt for name and begin adventure
-# Send to destination to help out
-# Chooses to go to Portsmouth
-# Chooses to go to save the Elves
-# Chooses to go save the Dwarves

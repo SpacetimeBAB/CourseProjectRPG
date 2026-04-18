@@ -1,0 +1,38 @@
+#        PSEUDOCODE:
+# Define main function
+# Declare constants for options
+# Declare constants for slatan's last name
+# Declare constant for destination choice
+# Declare constant for total points
+# Display introduction to RPG and show game title Slatan
+# Took away while true for a better loop that only runs until the user chooses to quit the game, instead of having to break out of it (NEW)
+# Give Main Menu and give options to choose
+# Depending on option chosen give output
+# If choose rules send to rules and then back to main menu
+# If choose to start game then prompt for name and begin adventure
+# High score name for final points (NEW)
+# Send to destination to help out
+# Now has random assignation of points in some choices to give variety to points
+# Added exceptions so users don't see error messages
+# Only added to main as those are the ones that cause crashes, on other parts simply ignores and if does cause crash simply restarts with the error message I wrote.
+# Chooses to go to Portsmouth
+# Chooses how to save villagers
+# Send to other 2 destinations
+# Chooses to go to save the Elves
+# Saves elf queen
+# Sent to other 2 destinations
+# Chooses to go save the Dwarves
+# Cures Dwarves
+# Sent to other 2 destinations
+# Every time Slatan makes a decision points are given out
+# At end displays total points made through their decisions and ends game
+# First created a file called highscores.txt to hold highscores and who set them (NEW)
+# Then, read the file to get current high score and name (NEW)
+# Reads the name of highscorer (NEW)
+# Reads highscorer's points (NEW)
+# Compares current player's points to high scores to see if to congratulate and set new score or say sorry and to try again. (NEW)
+# If points are high enough they beat the high score and congratulated (NEW)
+# If points are high enough they beat the high score and congratulated (NEW)
+# Rewrites highscores.txt with new high score and name (NEW)
+# Breaks due to error I was getting where if they kept retrying after setting a high score the game kept it as their current score (NEW)
+# Calls main function

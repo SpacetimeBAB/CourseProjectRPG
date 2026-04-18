@@ -1,5 +1,5 @@
 # Jeremías Branger
-# Date: 3/8/26
+# Date: 4/18/26
 # Course project RPG
 
 #        PSEUDOCODE:
@@ -9,15 +9,16 @@
 # Declare constant for destination choice
 # Declare constant for total points
 # Display introduction to RPG and show game title Slatan
-# Creates an everlasting loop that keeps the game running until the author chooses to quit the game (NEW)
+# Took away while true for a better loop that only runs until the user chooses to quit the game, instead of having to break out of it (NEW)
 # Give Main Menu and give options to choose
 # Depending on option chosen give output
 # If choose rules send to rules and then back to main menu
 # If choose to start game then prompt for name and begin adventure
+# High score name for final points (NEW)
 # Send to destination to help out
-# Now has random assignation of points in some choices to give variety to points (NEW)
-# Added exceptions so users don't see error messages (NEW)
-# Only added to main as those are the ones that cause crashes, on other parts simply ignores and if does cause crash simply restarts with the error message I wrote. (NEW)
+# Now has random assignation of points in some choices to give variety to points
+# Added exceptions so users don't see error messages
+# Only added to main as those are the ones that cause crashes, on other parts simply ignores and if does cause crash simply restarts with the error message I wrote.
 # Chooses to go to Portsmouth
 # Chooses how to save villagers
 # Send to other 2 destinations
@@ -29,6 +30,15 @@
 # Sent to other 2 destinations
 # Every time Slatan makes a decision points are given out
 # At end displays total points made through their decisions and ends game
+# First created a file called highscores.txt to hold highscores and who set them (NEW)
+# Then, read the file to get current high score and name (NEW)
+# Reads the name of highscorer (NEW)
+# Reads highscorer's points (NEW)
+# Compares current player's points to high scores to see if to congratulate and set new score or say sorry and to try again. (NEW)
+# If points are high enough they beat the high score and congratulated (NEW)
+# If points are high enough they beat the high score and congratulated (NEW)
+# Rewrites highscores.txt with new high score and name (NEW)
+# Breaks due to error I was getting where if they kept retrying after setting a high score the game kept it as their current score (NEW)
 # Calls main function
 
 from random import randrange
@@ -133,7 +143,8 @@ def main():
     totalPoints = mainMenuOption = 0
     slatanLastName = ""
     displayIntro()
-    while True:
+    # Took away while true for a better loop that only runs until the user chooses to quit the game, instead of having to break out of it (NEW)
+    while mainMenuOption != 3:
         try:
             mainMenuOption = int(input("     [1] Rules\n"
                                        "     [2] Start your adventure\n"
@@ -145,8 +156,33 @@ def main():
             elif mainMenuOption == 2:
                 # Adventure begins and present lore
                 slatanLastName = input("What shall Slatan's last name be?")
+                # High score name for final points (NEW)
+                scoreName = input("What name do you want to be on the high score board?")
                 # Sends to other function to handle destination choices and points
                 totalPoints = destinationChoice(slatanLastName, totalPoints)
+
+                # First created a file called highscores.txt to hold highscores and who set them (NEW)
+                # Then, read the file to get current high score and name (NEW)
+                with open("highscores.txt", "r") as infile:
+                    # Reads the name of highscorer (NEW)
+                    HighscoreName = infile.readline().strip()
+                    # Reads highscorer's points (NEW)
+                    HighscorePoints = int(infile.readline())
+                    # Compares current player's points to high scores to see if to congratulate and set new score or say sorry and to try again. (NEW)
+                    if totalPoints < HighscorePoints:
+                        # If points not high enough they try again(NEW)
+                        print(f"Sorry, you didn't beat a past Slatan's high score set by {HighscoreName} with {HighscorePoints} points. Better luck next time!")
+                    else:
+                        # If points are high enough they beat the high score and congratulated (NEW)
+                        print(f"Congratulations, you beat the high score set by {HighscoreName} with {HighscorePoints} points! Your name and score have been added to the high score board!")
+
+                        # Rewrites highscores.txt with new high score and name (NEW)
+                        with open("highscores.txt", "w") as outfile:
+                            outfile.write(f"{scoreName}\n")
+                            outfile.write(f"{totalPoints}")
+                        # Breaks due to error I was getting where if they kept retrying after setting a high score the game kept it as their current score (NEW)
+                        break
+
             elif mainMenuOption == 3:
                 # Quits the game after choosing to quit.
                 print("Athena thanks you for your time.")
